@@ -1,15 +1,17 @@
 var React = require('react/addons'),
-ReactApp = React.createFactory(require('../components/ReactApp'));
+ReactApp = React.createFactory(require('../components/ReactApp')),
+CommentForm = React.createFactory(require('../components/CommentForm'));
 
 module.exports = function(app) {
 
 	app.get('/', function(req, res){
-		// React.renderToString takes your component
-	    // and generates the markup
 		var reactHtml = React.renderToString(ReactApp({}));
-	    // Output html rendered by react
-		// console.log(myAppHtml);
-	    res.render('index.ejs', {reactOutput: reactHtml});
+	  res.render('index.ejs', {reactOutput: reactHtml});
 	});
+
+  app.get('/comment', function(req, res){
+    var reactHtml = React.renderToString(CommentForm({}));
+    res.render('comment.ejs', {reactOutput: reactHtml});
+  });
 
 };
